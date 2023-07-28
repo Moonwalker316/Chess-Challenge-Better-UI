@@ -7,6 +7,7 @@ using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Diagnostics;
 using static ChessChallenge.Application.Settings;
 using static ChessChallenge.Application.ConsoleHelper;
 
@@ -57,6 +58,8 @@ namespace ChessChallenge.Application
         int totalMovesPlayed = 0;
         public int trueTotalMovesPlayed = 0;
 
+        private Stopwatch stopwatch = new Stopwatch();
+
         public ChallengeController()
         {
             Log($"Launching Chess-Challenge version {Settings.Version}");
@@ -82,6 +85,7 @@ namespace ChessChallenge.Application
             // End any ongoing game
             EndGame(GameResult.DrawByArbiter, log: false, autoStartNextBotMatch: false);
             gameID++;
+            stopwatch.Start();
 
             // Stop prev task and create a new one
             if (RunBotsOnSeparateThread)
@@ -321,6 +325,15 @@ namespace ChessChallenge.Application
                     {
                         fastForward = false;
                         Log("Match finished", false, ConsoleColor.Blue);
+                        stopwatch.Stop();
+                        // Get the elapsed time as a TimeSpan value.
+                        TimeSpan ts = stopwatch.Elapsed;
+
+                        // Format and display the TimeSpan value.
+                        string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+                            ts.Hours, ts.Minutes, ts.Seconds,
+                            ts.Milliseconds / 10);
+                        Console.WriteLine("RunTime " + elapsedTime);
                     }
                 }
             }
