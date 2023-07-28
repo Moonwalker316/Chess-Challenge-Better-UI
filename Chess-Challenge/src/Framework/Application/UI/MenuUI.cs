@@ -68,7 +68,7 @@ namespace ChessChallenge.Application
 
             if(NextButtonInRow("Smallerer Window", ref buttonPos, spacing,  buttonSize)) 
             {
-                Program.SetWindowsSize(Settings.ScreenSizeXS);
+                Program.SetWindowSize(Settings.ScreenSizeXS);
             }
             
             if (NextButtonInRow("Exit (ESC)", ref buttonPos, spacing, buttonSize))
