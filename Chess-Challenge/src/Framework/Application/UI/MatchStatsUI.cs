@@ -42,9 +42,9 @@ namespace ChessChallenge.Application
                     DrawNextText($"Score: +{stats.NumWins} ={stats.NumDraws} -{stats.NumLosses}", regularFontSize, white);
                     DrawNextText($"Num Timeouts: {stats.NumTimeouts}", regularFontSize, col);
                     DrawNextText($"Num Illegal Moves: {stats.NumIllegalMoves}", regularFontSize, col);
-                    DrawNextText($"Winrate: {(float)stats.NumWins / (controller.CurrGameNumber - 1) * 100}%", regularFontSize, green);
-                    DrawNextText($"Draw rate: {(float)stats.NumDraws / (controller.CurrGameNumber - 1) * 100}%", regularFontSize, white);
-                    DrawNextText($"Loss rate: {(float)stats.NumLosses / (controller.CurrGameNumber - 1) * 100}%", regularFontSize, red);
+                    DrawNextText($"Winrate: {((float)stats.NumWins / (controller.CurrGameNumber - 1) * 100).ToString("F")}%", regularFontSize, green);
+                    DrawNextText($"Draw rate: {((float)stats.NumDraws / (controller.CurrGameNumber - 1) * 100).ToString("F")}%", regularFontSize, white);
+                    DrawNextText($"Loss rate: {((float)stats.NumLosses / (controller.CurrGameNumber - 1) * 100).ToString("F")}%", regularFontSize, red);
                 }
                 DrawNextText($"Average moves per game: {controller.trueTotalMovesPlayed / controller.CurrGameNumber - 1}", regularFontSize, white);
 
