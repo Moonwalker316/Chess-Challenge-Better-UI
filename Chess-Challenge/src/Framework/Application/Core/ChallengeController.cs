@@ -151,7 +151,7 @@ namespace ChessChallenge.Application
 
             try
             {
-                API.Timer timer = new(PlayerToMove.TimeRemainingMs);
+                API.Timer timer = new(PlayerToMove.TimeRemainingMs, PlayerNotOnMove.TimeRemainingMs, GameDurationMilliseconds);
                 API.Move move = PlayerToMove.Bot.Think(botBoard, timer);
                 return new Move(move.RawValue);
             }
@@ -439,6 +439,8 @@ namespace ChessChallenge.Application
 
 
         ChessPlayer PlayerToMove => board.IsWhiteToMove ? PlayerWhite : PlayerBlack;
+        ChessPlayer PlayerNotOnMove => board.IsWhiteToMove ? PlayerBlack : PlayerWhite;
+
         public int TotalGameCount => botMatchStartFens.Length * 2;
         public int CurrGameNumber => Math.Min(TotalGameCount, botMatchGameIndex + 1);
         public string AllPGNs => pgns.ToString();
